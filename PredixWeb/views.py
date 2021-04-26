@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Movies, MyMovies
+from .models import Movies, MyMovies, ContactUs
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 import random
@@ -46,7 +46,6 @@ def signupPage(request):
         else:
             user = User.objects.create_user(username=uname, password=password, email=email, first_name=first_name, last_name=last_name)
             user.save();
-            print('user created')
             messages.success(request, "User Registered Successfully, please login to continue...")
             return render(request, "login.html")
     return render(request, "signup.html")
@@ -62,6 +61,20 @@ def aboutPage(request):
     return render(request, 'about.html')
 
 def contactPage(request):
+    if request.method=='POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        if request.user.is_authenticated:
+            uid = request.user.id
+            user = User.objects.get(id=uid)
+            query = ContactUs.objects.create(uid=user, name=name, email=email, subject=subject)
+            query.save();
+        else:
+            query = ContactUs.objects.create(name=name, email=email, subject=subject)
+            query.save();
+        messages.success(request, "Request submitted successfully, we will reach you shortly if needed.")
+        
     return render(request, 'contact.html')
 
 def addMovie(request, mid):
@@ -75,8 +88,7 @@ def addMovie(request, mid):
 def searchPage(request):
     srh = request.GET['query']
     obj = Movies.objects.filter(title__icontains=srh).filter(cover__isnull=False)
-
-
+    
     mymovies = list(MyMovies.objects.all().values_list('mid', flat=True))
     other = list(Movies.objects.order_by('-rdate').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     return render(request, 'search.html', {'movies': obj, 'other': other})

@@ -20,6 +20,15 @@ class Movies(models.Model):
     def __str__(self) -> str:
         return self.title   
     
+class ContactUs(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    uid = models.ForeignKey(User, on_delete=CASCADE, null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return "Query from " + str(self.name)
+    
 class Cast(models.Model):
     mid = models.ForeignKey(Movies, on_delete=CASCADE)
     name = models.CharField(max_length=255)
