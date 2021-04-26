@@ -1,0 +1,239 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Movies Website</title>
+		<link rel="stylesheet" href="{% static "home/css/style.css" %}">
+		<link rel="stylesheet" href="{% static "home/css/lightslider.css" %}">
+		<script src="{% static "home/JS/JQuery3.3.1.js" %}"></script>
+		<script src="{% static "home/JS/lightslider.js" %}"></script>
+		<link rel="shortcut icon" href="{% static "home/images/fav icon.png" %}">
+		<script src="https://kit.fontawesome.com/c8e4d183c2.js"
+			crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+		<nav>
+			<a href="#" class="logo">
+				<img src="{% static "home/images/fav icon.png" %}"
+					style="width:40px;height:40px">
+			</a>
+			<input type="checkbox" class="menu-btn" id="menu-btn" />
+			<label class="menu-icon" for="menu-btn">
+				<span class="nav-icon"></span>
+			</label>
+			<ul class="menu">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'about' %}">About Us</a></li>
+				<li><a href="{% url 'contact' %}">Contact Us</a></li>
+			</ul>
+			<form class="search" action="{% url 'searchmovie' %}" method="get">
+				<input type="search" name="query" placeholder="Find Your favourite Movies"
+					/>
+				<i type='submit' class="fas fa-search"></i>
+			</form>
+			{% if user.is_authenticated %}
+			<ul class="menu">
+				<li><a href="{% url 'logout' %}">Log Out</a></li>
+			</ul>
+			{% else %}
+			<ul class="menu">
+				<li><a href="{% url 'login' %}">Log In</a></li>
+				<li><a href="{% url 'signup' %}">Sign Up</a></li>
+			</ul>
+			{% endif %}
+			<!-- <div class="profile">
+			<a href="{% url 'login' %}" title=""><i class="fas fa-user-alt"></i></a>
+		</div> -->
+		</nav>
+
+		<!-- <section id="main">
+		<h1 class="showcase-heading">Showcase</h1>
+		<ul id="autoWidth" class="cs-hidden">
+			{% for movie in m %}
+				<li class="item-a">
+					<div class="showcase-box">
+					<a href="{movie.}" title="">
+						<img src={{ movie.cover }}>
+					</a>
+				</div>
+				</li>
+  			{% endfor %}			  	
+		</ul>
+	</section> -->
+		{% if latest %}
+		<section id="main">
+			<br><br><br><br>
+			<h2 class="latest-heading">Latest Movies</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in latest %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.title}}</strong>
+							<p>{{movie.rdate}}</p>
+						</div>
+						{% if user.is_authenticated %}
+						<div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+								watched</a></div>
+						<br>
+						{% endif %}
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+
+		{% if bollywood%}
+		<section id="main">
+			<h2 class="latest-heading">Bollywood Movies</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in bollywood %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.title}}</strong>
+							<p>{{movie.rdate}}</p>
+						</div>
+						{% if user.is_authenticated %}
+						<div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+								watched</a></div>
+						<br>
+						{% endif %}
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+
+		{% if hollywood%}
+		<section id="main">
+			<h2 class="latest-heading">Hollywood Movies</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in hollywood %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.title}}</strong>
+							<p>{{movie.rdate}}</p>
+						</div>
+						{% if user.is_authenticated %}
+						<div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+								watched</a></div>
+						<br>
+						{% endif %}
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+
+		{% if movies %}
+		<section id="main">
+			<h2 class="latest-heading">Movies</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in movies %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.title}}</strong>
+							<p>{{movie.rdate}}</p>
+						</div>
+						{% if user.is_authenticated %}
+						<div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+								watched</a>
+						</div>
+						<br>
+						{% endif %}
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+		{% if user.is_authenticated %}
+		{% if mylist %}
+		<section id="main">
+			<h2 class="latest-heading">My Movies</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in mylist %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.mid.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.mid.title}}</strong>
+							<p>{{movie.mid.rdate}}</p>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+		{% endif %}
+		<style>
+			.copyrightText
+			{
+				width: 100%;
+				background: #7a7b7e;
+				padding: 8px 100px;
+				text-align: center;
+				color: #fff;
+			}
+		</style>
+		<div class="copyrightText">
+			<p>Copyright © 2021 Predixdb. All Rights Reserved</p>
+		</div>
+
+		<script>
+
+	    $(document).ready(function()
+	    {
+            $('#autoWidth, #autoWidth2').lightSlider(
+            {
+        		autoWidth:true,
+        		loop:true,
+        		onSliderLoad: function() 
+        		{
+            		$('#autoWidth, #autoWidth2').removeClass('cS-hidden');
+        		} 
+    		});  
+  		});
+	</script>
+	</body>
+</html>

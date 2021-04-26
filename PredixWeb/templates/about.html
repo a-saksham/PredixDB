@@ -1,0 +1,160 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>About US</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{% static "About/style.css" %}">
+		<link rel="shortcut icon" href="{% static "About/images/fav icon.png" %}">
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+			crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/c8e4d183c2.js"
+			crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<nav>
+			<a href="#" class="logo">
+				<img src="{% static "home/images/fav icon.png" %}"
+					style="width:40px;height:40px">
+			</a>
+			<input type="checkbox" class="menu-btn" id="menu-btn" />
+			<label class="menu-icon" for="menu-btn">
+				<span class="nav-icon"></span>
+			</label>
+			<ul class="menu">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'about' %}">About Us</a></li>
+				<li><a href="{% url 'contact' %}">Contact Us</a></li>
+			</ul>
+			<form class="search" action="{% url 'searchmovie' %}" method="get">
+				<input type="search" name="query" placeholder="Find Your favourite Movies"
+					/>
+				<i type='submit' class="fas fa-search"></i>
+			</form>
+			{% if user.is_authenticated %}
+			<ul class="menu">
+				<li><a href="{% url 'logout' %}">Log Out</a></li>
+			</ul>
+			{% else %}
+			<ul class="menu">
+				<li><a href="{% url 'login' %}">Log In</a></li>
+				<li><a href="{% url 'signup' %}">Sign Up</a></li>
+			</ul>
+			{% endif %}
+			<!-- <div class="profile">
+			<a href="{% url 'login' %}" title=""><i class="fas fa-user-alt"></i></a>
+		</div> -->
+		</nav>
+		<div class="wrapper">
+			<div class="section">
+				<div class="left-section">
+					<div class="content">
+						<div class="title">
+							<br><br><br>
+							<h2>About Us</h2>
+							<h3><em>To flourish your media consumption experience.</em></h3>
+						</div>
+						<p>PredixDB is a online platform which will assist you to keep track of
+							everything that you have already watched, currently watching or dropped.
+							Not only this we also recommend what to watch next and provide you the
+							updates regarding your favourite shows.</p>
+						<div class="social">
+							<a href=""><i class="fab fa-facebook"></i></a>
+							<a href=""><i class="fab fa-twitter"></i></a>
+							<a href=""><i class="fab fa-instagram"></i></a>
+							<a href=""><i class="far fa-envelope"></i></a>
+							<h5>(Not Yet Active xD)</h5>
+						</div>
+					</div>
+				</div>
+				<div class="image-section">
+					<br><br>
+					<img src="{% static "About/l.png" %}">
+				</div>
+			</div>
+		</div>
+		<!-- <div class="team">
+		<h1>Our Team</h1>
+	</div>
+	<section>
+      	<div class="container">
+        	<div class="card">
+          		<div class="content">
+            		<div class="imgBx"><img src="{%static "About/Aashutosh.jpg" %}"></div>
+        			<div class="contentBx">
+  						<h3>Ashutosh Lodhi<br><span>Founder</span></h3>
+        			</div>
+      			</div>
+      			<ul class="sci">
+        			<li style="--i:1">
+          				<a href="https://www.facebook.com/ashutosh.lodhi.33"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        			</li>
+        			<li style="--i:2">
+          				<a href="https://twitter.com/aashutosh_lodhi?s=08"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    				</li>
+        			<li style="--i:3">
+          				<a href="https://instagram.com/aashutosh1click?igshid=18tk5klb48aqn"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        			</li>
+      			</ul>
+    		</div>
+        	<div class="card">
+          		<div class="content">
+            		<div class="imgBx"><img src="{%static "About/Aashutosh.jpg" %}"></div>
+            		<div class="contentBx">
+              			<h3>Saksham Agarwal<br><span>Founder</span></h3>
+            		</div>
+          		</div>
+          		<ul class="sci">
+            		<li style="--i:1">
+              			<a href="https://www.facebook.com/ganesh.modi.3745"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            		</li>
+            		<li style="--i:2">
+              			<a href="https://mail.google.com/mail/u/0/?pli=1#inbox?compose=DmwnWtMjKSFmXLMpKJkPMtZSKpzZHZTFWMtbRrLXVcJdgsHCggwDcMKmQgQkgpMtQtJdHTsKDVHG"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            		</li>
+            		<li style="--i:3">
+              			<a href="https://instagram.com/itz___ganesh?igshid=1b39b8l2svaqk"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            		</li>
+          		</ul>
+        	</div>
+        	<div class="card">
+          		<div class="content">
+            		<div class="imgBx"><img src="{%static "About/Aashutosh.jpg" %}"></div>
+            		<div class="contentBx">
+              			<h3>Sanket Kumar Choudhary<br><span>Founder</span></h3>
+            		</div>
+          		</div>
+          		<ul class="sci">
+            		<li style="--i:1">
+              			<a href="https://twitter.com/VirajChavda1?s=08"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            		</li>
+            		<li style="--i:2">
+              			<a href="https://instagram.com/viraj.chawda?igshid=1jnylbqi5i916"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            		</li>
+            		<li style="--i:3">
+              			<a href="https://mail.google.com/mail/u/0/?pli=1#inbox?compose=GTvVlcSBmzlXxBTkNrKbkFtqWjhDkqJGvGfZJwGpHRVKmlJxkrGNcnCzwbWmDGHpHvLxKPKsxMCJF"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            		</li>
+          		</ul>
+        	</div>
+        </div>
+    </section> -->
+
+	<style>
+		.copyrightText
+		{
+			width: 100%;
+			background: #7a7b7e;
+			padding: 8px 100px;
+			text-align: center;
+			color: #fff;
+		}
+	</style>
+	<div class="copyrightText">
+		<p>Copyright © 2021 Predixdb. All Rights Reserved</p>
+	</div>
+	</body>
+</html>

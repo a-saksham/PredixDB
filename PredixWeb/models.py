@@ -1,0 +1,43 @@
+from django.db import models
+from django.db.models.deletion import CASCADE
+from django.contrib.auth.models import User
+
+# Create your models here.
+class Movies(models.Model):
+    mid = models.CharField(max_length=255, primary_key=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    type = models.CharField(max_length=255, null=True, blank=True)
+    genre = models.CharField(max_length=255, null=True, blank=True)
+    rdate = models.CharField(max_length=255, null=True, blank=True)
+    language = models.CharField(max_length=255, null=True, blank=True)
+    cover = models.CharField(max_length=255, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    sequal = models.CharField(max_length=255, null=True, blank=True)
+    trailer = models.CharField(max_length=255, null=True, blank=True)
+    objects = models.Manager()
+    
+    def __str__(self) -> str:
+        return self.title   
+    
+class Cast(models.Model):
+    mid = models.ForeignKey(Movies, on_delete=CASCADE)
+    name = models.CharField(max_length=255)
+    gender = models.CharField(max_length = 255)
+    role = models.CharField(max_length=255)
+    designation = models.CharField(max_length=255)
+    objects = models.Manager()
+
+class MyMovies(models.Model):
+    mid = models.ForeignKey(Movies, on_delete=CASCADE)
+    uid = models.ForeignKey(User, on_delete=CASCADE, null=True, blank=True)
+    watched = models.BooleanField()
+    date = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()   
+    
+class Notifications(models.Model):
+    nid = models.AutoField(primary_key=True)
+    mid = models.ForeignKey(Movies, on_delete=CASCADE)
+    message = models.CharField(max_length=255)
+    ndate = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()

@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Movies Website</title>
+		<link rel="stylesheet" href="{%static "home/css/style.css" %}">
+		<link rel="stylesheet" href="{%static "home/css/lightslider.css" %}">
+		<script src="{%static "home/JS/JQuery3.3.1.js" %}"></script>
+		<script src="{%static "home/JS/lightslider.js" %}"></script>
+		<link rel="shortcut icon" href="{%static "home/images/fav icon.png" %}">
+		<script src="https://kit.fontawesome.com/c8e4d183c2.js"
+			crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+		<nav>
+			<a href="#" class="logo">
+				<img src="{%static "home/images/fav icon.png" %}"
+					style="width:40px;height:40px">
+			</a>
+			<input type="checkbox" class="menu-btn" id="menu-btn" />
+			<label class="menu-icon" for="menu-btn">
+				<span class="nav-icon"></span>
+			</label>
+			<ul class="menu">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'about' %}">About Us</a></li>
+				<li><a href="{% url 'contact' %}">Contact Us</a></li>
+			</ul>
+			<form class="search" action="{% url 'searchmovie' %}" method="get">
+				<input type="search" name="query" placeholder="Find Your favourite Movies"
+					/>
+				<i type='submit' class="fas fa-search"></i>
+			</form>
+			{% if user.is_authenticated %}
+			<ul class="menu">
+				<li><a href="{% url 'logout' %}">Log Out</a></li>
+			</ul>
+			{% else %}
+			<ul class="menu">
+				<li><a href="{% url 'login' %}">Log In</a></li>
+				<li><a href="{% url 'signup' %}">Sign Up</a></li>
+			</ul>
+			{% endif %}
+		</nav>
+
+		{% if movies %}
+		<section id="main">
+			<br><br><br><br>
+			<h2 class="latest-heading">Search Results</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in movies %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.title}}</strong>
+							<p>{{movie.rdate}}</p>
+						</div>
+						{% if user.is_authenticated %}
+						<div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+								watched</a></div>
+						<br>
+						{% endif %}
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+
+		{% if other %}
+		<section id="main">
+			<h2 class="latest-heading">Also Watch</h2>
+			<ul id="autoWidth2" class="cs-hidden">
+				{% for movie in other %}
+				<li class="item-a">
+					<div class="latest-box">
+						<div class="latest-b-img">
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+							<img src={{ movie.cover }}>
+							<!-- </a> -->
+						</div>
+						<div class="latest-b-text">
+							<strong>{{movie.title}}</strong>
+							<p>{{movie.rdate}}</p>
+						</div>
+						{% if user.is_authenticated %}
+						<div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+								watched</a></div>
+						<br>
+						{% endif %}
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		{% endif %}
+
+		<script>
+
+	    $(document).ready(function()
+	    {
+            $('#autoWidth, #autoWidth2').lightSlider(
+            {
+        		autoWidth:true,
+        		loop:true,
+        		onSliderLoad: function() 
+        		{
+            		$('#autoWidth, #autoWidth2').removeClass('cS-hidden');
+        		} 
+    		});  
+  		});
+	</script>
+	</body>
+</html>

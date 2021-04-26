@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Website</title>
+    <link rel="stylesheet" href="{% static "home/css/style.css" %}">
+    <link rel="stylesheet" href="{% static "home/css/lightslider.css" %}">
+    <script src="{% static "home/JS/JQuery3.3.1.js" %}"></script>
+    <script src="{% static "home/JS/lightslider.js" %}"></script>
+    <link rel="shortcut icon" href="{% static "home/images/fav icon.png" %}">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js"
+      crossorigin="anonymous"></script>
+
+  </head>
+  <style>
+input[type=text], select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-top: 95px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.col {
+    margin: auto;
+    width: 50%;
+        padding: 10px;
+}
+
+</style>
+  <body>
+    <nav>
+      <a href="#" class="logo">
+        <img src="{% static "home/images/fav icon.png" %}"
+          style="width:40px;height:40px">
+      </a>
+      <input type="checkbox" class="menu-btn" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn">
+        <span class="nav-icon"></span>
+      </label>
+      <ul class="menu">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+      </ul>
+      <form class="search" action="{% url 'searchmovie' %}" method="get">
+        <input type="search" name="query" placeholder="Find Your favourite Movies" />
+        <i type='submit' class="fas fa-search"></i>
+      </form>
+      {% if user.is_authenticated %}
+      <ul class="menu">
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+      </ul>
+      {% else %}
+      <ul class="menu">
+        <li><a href="{% url 'login' %}">Log In</a></li>
+        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+      </ul>
+      {% endif %}
+      <!-- <div class="profile">
+			<a href="{% url 'login' %}" title=""><i class="fas fa-user-alt"></i></a>
+		</div> -->
+    </nav>
+    
+    <div class="container">
+      <div style="text-align:center">
+        <h2>Contact Us / Feedback</h2>
+        <p>Swing by for a cup of coffee, or leave us a message:</p>
+      </div>
+      <div class="col" style="width: 40%;">
+        <form action="/action_page.php">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+          <label for="email">Email ID</label>
+          <input type="text" id="email" name="email" placeholder="Your email id..">
+          <label for="subject">Subject</label>
+          <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <br><br>
+    
+    <style>
+			.copyrightText
+			{
+				width: 100%;
+				background: #7a7b7e;
+				padding: 8px 100px;
+				text-align: center;
+				color: #fff;
+			}
+		</style>
+		<div class="copyrightText">
+			<p>Copyright © 2021 Predixdb. All Rights Reserved</p>
+		</div>
+  </body>

@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login </title>
+		<meta name="viewport" content="width=device-width, initial-scale= 1.0">
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="{% static "Login/style.css" %}">
+	</head>
+	<body>
+		<section>
+			<div class="imgBx">
+				<img src="{% static "Login/bg.jpg" %}">
+			</div>
+			<div class="contentBx">
+				<div class="formBx">
+					<h2>Login</h2>
+					<form method="post">
+						{% csrf_token %}
+						<div class="inputBx">
+							<span>Username</span>
+							<input type="text" required autocomplete="off" name="uname"
+								placeholder="alan_walker">
+						</div>
+						<div class="inputBx">
+							<span>Password</span>
+							<input type="password" required autocomplete="off" name="password"
+								placeholder="password">
+						</div>
+						<!-- <div class="remember">
+						<label><input type="checkbox" name="">Remember me</label>
+					</div> -->
+						<div class="inputBx">
+							<input type="submit" value="Sign In">
+						</div>
+						<div class="inputBx">
+							<p>Don't Have an Account ? <a href="{% url 'signup' %}">Sign Up</a></p>
+						</div>
+						{% if messages %}
+						{% for result in messages %}
+						<b style="color: green;">{{result}}</b>
+						{% endfor %}
+						{% endif %}
+					</form>
+					<!-- <h3>Login With Social Media</h3>
+				<ul class="sci">
+					<li><img src="{%static "Login/google.png" %}"></li>
+					<p>or</p>
+					<li><img src="{%static "Login/facebook.png" %}"></li>
+				</ul> -->
+				</div>
+			</div>
+		</section>
+		<style>
+			.copyrightText
+			{
+				width: 100%;
+				background: #7a7b7e;
+				padding: 8px 100px;
+				text-align: center;
+				color: #fff;
+			}
+		</style>
+		<div class="copyrightText">
+			<p>Copyright © 2021 Predixdb. All Rights Reserved</p>
+		</div>
+	</body>
+</html>
