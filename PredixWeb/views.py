@@ -4,20 +4,20 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 import random
 
+
 def showIndexPage(request):
     mymovies = list(MyMovies.objects.all().values_list('mid', flat=True))
     latest = list(Movies.objects.order_by('-rdate').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     hollywood = list(Movies.objects.filter(language__istartswith = 'english').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     bollywood = list(Movies.objects.exclude(language__istartswith = 'english').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     mylist = list(MyMovies.objects.filter(uid__id__exact=request.user.id))
-    movies = list(Movies.objects.all().filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
-    
+    movies = list(Movies.objects.all().filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])   
     random.shuffle(latest)
     random.shuffle(hollywood)
     random.shuffle(movies)
     random.shuffle(bollywood)
-    
     return render(request, 'index.html', {'movies': movies, 'mylist': mylist, 'latest': latest, 'hollywood': hollywood, 'bollywood': bollywood})
+
 
 def loginPage(request):
     if request.method=='POST':
@@ -28,9 +28,9 @@ def loginPage(request):
             auth.login(request, user)
             return redirect('/')
         else:
-            messages.error(request, 'invalid credentials or user not registered...')
-            
+            messages.error(request, 'invalid credentials or user not registered...')   
     return render(request, 'login.html')
+
 
 def signupPage(request):
     if request.method=='POST':
@@ -50,12 +50,15 @@ def signupPage(request):
             return render(request, "login.html")
     return render(request, "signup.html")
 
+
 def logout(request):
     auth.logout(request)
     return redirect('/')
 
+
 def movieinfoPage(request):
     return render(request, 'movieinfo.html')
+
 
 def aboutPage(request):
     return render(request, 'about.html')
@@ -73,9 +76,9 @@ def contactPage(request):
         else:
             query = ContactUs.objects.create(name=name, email=email, subject=subject)
             query.save();
-        messages.success(request, "Request submitted successfully, we will reach you shortly if needed.")
-        
+        messages.success(request, "Request submitted successfully, we will reach you shortly if needed.") 
     return render(request, 'contact.html')
+
 
 def addMovie(request, mid):
     uid = request.user.id
@@ -85,10 +88,10 @@ def addMovie(request, mid):
     ob.save();
     return redirect('/')
 
+
 def searchPage(request):
     srh = request.GET['query']
     obj = Movies.objects.filter(title__icontains=srh).filter(cover__isnull=False)
-    
     mymovies = list(MyMovies.objects.all().values_list('mid', flat=True))
     other = list(Movies.objects.order_by('-rdate').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     return render(request, 'search.html', {'movies': obj, 'other': other})

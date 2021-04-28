@@ -2,7 +2,6 @@ import mysql.connector as connector
 from googlesearch import search
 import imdb
 
-
 class PredixDB:
     def __init__(self, tablename):
         # Initialize Connection
