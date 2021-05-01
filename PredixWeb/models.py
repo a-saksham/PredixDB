@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Movies(models.Model):
     mid = models.CharField(max_length=255, primary_key=True)
     title = models.CharField(max_length=255, null=True, blank=True)
-    rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    rating = models.CharField(max_length=5, null=True, blank=True)
     type = models.CharField(max_length=255, null=True, blank=True)
     genre = models.CharField(max_length=255, null=True, blank=True)
     rdate = models.CharField(max_length=255, null=True, blank=True)
@@ -15,6 +15,7 @@ class Movies(models.Model):
     description = models.TextField(null=True, blank=True)
     sequal = models.CharField(max_length=255, null=True, blank=True)
     trailer = models.CharField(max_length=255, null=True, blank=True)
+    year = models.CharField(max_length=5, null=True, blank=True)
     objects = models.Manager()
     
     def __str__(self) -> str:

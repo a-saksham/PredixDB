@@ -7,7 +7,7 @@ import random
 
 def showIndexPage(request):
     mymovies = list(MyMovies.objects.all().values_list('mid', flat=True))
-    latest = list(Movies.objects.order_by('-rdate').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
+    latest = list(Movies.objects.order_by('-year').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     hollywood = list(Movies.objects.filter(language__istartswith = 'english').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     bollywood = list(Movies.objects.exclude(language__istartswith = 'english').filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     mylist = list(MyMovies.objects.filter(uid__id__exact=request.user.id))
@@ -62,6 +62,7 @@ def movieinfoPage(request):
 
 def aboutPage(request):
     return render(request, 'about.html')
+
 
 def contactPage(request):
     if request.method=='POST':
