@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE-edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Movies Website</title>
+		<title>Search Movie</title>
 		<link rel="stylesheet" href="{%static "home/css/style.css" %}">
 		<link rel="stylesheet" href="{%static "home/css/lightslider.css" %}">
 		<script src="{%static "home/JS/JQuery3.3.1.js" %}"></script>
@@ -67,7 +67,7 @@
 						</div>
 						{% if user.is_authenticated %}
 						<div>
-							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+							<a href="{% url 'addmoviesearch' movie.mid query %}" style="color:chocolate;">Add to
 								watched</a></div>
 						<br>
 						{% endif %}
@@ -115,11 +115,11 @@
             {
         		autoWidth:true,
         		loop:true,
-        		onSliderLoad: function() 
+        		onSliderLoad: function()
         		{
             		$('#autoWidth, #autoWidth2').removeClass('cS-hidden');
-        		} 
-    		});  
+        		}
+    		});
   		});
 	</script>
 	</body>

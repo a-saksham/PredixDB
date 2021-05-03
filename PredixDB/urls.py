@@ -29,6 +29,7 @@ urlpatterns = [
     path('movie/', views.movieinfoPage, name="movieinfo"),
     path('logout/', views.logout, name="logout"),
     path('contactus/', views.contactPage, name="contact"),
-    path('addmovie/<int:mid>/', views.addMovie, name="addmovie"),
+    path('addmovie/<str:mid>/', views.addMovie, name="addmovie"),
+    path('addmovie/<str:mid>/<str:query>', views.addMovieFromSearch, name="addmoviesearch"),
     path('searchmovie', views.searchPage, name="searchmovie"),
 ]+static(settings.CODE_URL, document_root=settings.CODE_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

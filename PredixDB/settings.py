@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '4$#uv=q-=l)2ivo0td9trv$irm2&==24t76&2u69-kp)qi9_%m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'PredixDB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'predixweb',
-        'USER': 'predixweb',
+        'NAME': 'predix$predixweb',
+        'USER': 'predix',
         'PASSWORD': 'predixdb_password',
-        'HOST': 'localhost',
+        'HOST': 'predix.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }

@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE-edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Movies Website</title>
+		<title>PredixDB</title>
 		<link rel="stylesheet" href="{% static "home/css/style.css" %}">
 		<link rel="stylesheet" href="{% static "home/css/lightslider.css" %}">
 		<script src="{% static "home/JS/JQuery3.3.1.js" %}"></script>
@@ -62,7 +62,7 @@
 					</a>
 				</div>
 				</li>
-  			{% endfor %}			  	
+  			{% endfor %}
 		</ul>
 	</section> -->
 		{% if latest %}
@@ -95,11 +95,11 @@
 		</section>
 		{% endif %}
 
-		{% if bollywood%}
+        {% if trending %}
 		<section id="main">
-			<h2 class="latest-heading">Bollywood Movies</h2>
+			<h2 class="latest-heading">Trending Movies</h2>
 			<ul id="autoWidth2" class="cs-hidden">
-				{% for movie in bollywood %}
+				{% for movie in trending %}
 				<li class="item-a">
 					<div class="latest-box">
 						<div class="latest-b-img">
@@ -113,8 +113,7 @@
 						</div>
 						{% if user.is_authenticated %}
 						<div>
-							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
-								watched</a></div>
+							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to watched</a></div>
 						<br>
 						{% endif %}
 					</div>
@@ -124,34 +123,63 @@
 		</section>
 		{% endif %}
 
-		{% if hollywood%}
-		<section id="main">
-			<h2 class="latest-heading">Hollywood Movies</h2>
-			<ul id="autoWidth2" class="cs-hidden">
-				{% for movie in hollywood %}
-				<li class="item-a">
-					<div class="latest-box">
-						<div class="latest-b-img">
+		<!--{% if bollywood%}-->
+		<!--<section id="main">-->
+		<!--	<h2 class="latest-heading">Bollywood Movies</h2>-->
+		<!--	<ul id="autoWidth2" class="cs-hidden">-->
+		<!--		{% for movie in bollywood %}-->
+		<!--		<li class="item-a">-->
+		<!--			<div class="latest-box">-->
+		<!--				<div class="latest-b-img">-->
 							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
-							<img src={{ movie.cover }}>
+		<!--					<img src={{ movie.cover }}>-->
 							<!-- </a> -->
-						</div>
-						<div class="latest-b-text">
-							<strong>{{movie.title}}</strong>
-							<p>{{movie.rdate}}</p>
-						</div>
-						{% if user.is_authenticated %}
-						<div>
-							<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
-								watched</a></div>
-						<br>
-						{% endif %}
-					</div>
-				</li>
-				{% endfor %}
-			</ul>
-		</section>
-		{% endif %}
+		<!--				</div>-->
+		<!--				<div class="latest-b-text">-->
+		<!--					<strong>{{movie.title}}</strong>-->
+		<!--					<p>{{movie.rdate}}</p>-->
+		<!--				</div>-->
+		<!--				{% if user.is_authenticated %}-->
+		<!--				<div>-->
+		<!--					<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to-->
+		<!--						watched</a></div>-->
+		<!--				<br>-->
+		<!--				{% endif %}-->
+		<!--			</div>-->
+		<!--		</li>-->
+		<!--		{% endfor %}-->
+		<!--	</ul>-->
+		<!--</section>-->
+		<!--{% endif %}-->
+
+		<!--{% if hollywood%}-->
+		<!--<section id="main">-->
+		<!--	<h2 class="latest-heading">Hollywood Movies</h2>-->
+		<!--	<ul id="autoWidth2" class="cs-hidden">-->
+		<!--		{% for movie in hollywood %}-->
+		<!--		<li class="item-a">-->
+		<!--			<div class="latest-box">-->
+		<!--				<div class="latest-b-img">-->
+							<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+		<!--					<img src={{ movie.cover }}>-->
+							<!-- </a> -->
+		<!--				</div>-->
+		<!--				<div class="latest-b-text">-->
+		<!--					<strong>{{movie.title}}</strong>-->
+		<!--					<p>{{movie.rdate}}</p>-->
+		<!--				</div>-->
+		<!--				{% if user.is_authenticated %}-->
+		<!--				<div>-->
+		<!--					<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to-->
+		<!--						watched</a></div>-->
+		<!--				<br>-->
+		<!--				{% endif %}-->
+		<!--			</div>-->
+		<!--		</li>-->
+		<!--		{% endfor %}-->
+		<!--	</ul>-->
+		<!--</section>-->
+		<!--{% endif %}-->
 
 		{% if movies %}
 		<section id="main">
@@ -228,11 +256,11 @@
             {
         		autoWidth:true,
         		loop:true,
-        		onSliderLoad: function() 
+        		onSliderLoad: function()
         		{
             		$('#autoWidth, #autoWidth2').removeClass('cS-hidden');
-        		} 
-    		});  
+        		}
+    		});
   		});
 	</script>
 	</body>
