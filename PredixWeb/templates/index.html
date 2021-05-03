@@ -65,9 +65,40 @@
   			{% endfor %}
 		</ul>
 	</section> -->
+	{% if recommendations %}
+	<section id="main">
+		<br><br><br><br>
+		<h2 class="latest-heading">Recommended Movies</h2>
+		<ul id="autoWidth2" class="cs-hidden">
+			{% for movie in recommendations %}
+			<li class="item-a">
+				<div class="latest-box">
+					<div class="latest-b-img">
+						<!-- <a href="{% url 'movieinfo' %}" title=""> -->
+						<img src={{ movie.cover }}>
+						<!-- </a> -->
+					</div>
+					<div class="latest-b-text">
+						<strong>{{movie.title}}</strong>
+						<p>{{movie.rdate}}</p>
+					</div>
+					{% if user.is_authenticated %}
+					<div>
+						<a href="{% url 'addmovie' movie.mid %}" style="color:chocolate;">Add to
+							watched</a></div>
+					<br>
+					{% endif %}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</section>
+	{% else %}
+	    <br><br><br><br>
+	{% endif %}
+
 		{% if latest %}
 		<section id="main">
-			<br><br><br><br>
 			<h2 class="latest-heading">Latest Movies</h2>
 			<ul id="autoWidth2" class="cs-hidden">
 				{% for movie in latest %}
