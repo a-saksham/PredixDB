@@ -14,7 +14,10 @@ def showIndexPage(request):
     mylist = list(MyMovies.objects.filter(uid__id__exact=request.user.id))
     movies = list(Movies.objects.all().filter(mid__isnull=False).filter(cover__isnull=False).exclude(mid__in=mymovies)[:50])
     trending_m = set(MyMovies.objects.annotate(noccurence=Count('mid')).order_by('-noccurence').values_list('mid', flat='True'))
-    trending = list(Movies.objects.filter(mid__in=trending_m).exclude(mymovies__uid=request.user))
+    if request.user.is_authenticated:
+        trending = list(Movies.objects.filter(mid__in=trending_m).exclude(mymovies__uid=request.user))
+    else:
+        trending = list(Movies.objects.filter(mid__in=trending_m))
     random.shuffle(trending)
     random.shuffle(latest)
     # random.shuffle(hollywood)
